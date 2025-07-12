@@ -4,58 +4,69 @@ import User from "@/models/user";
 
 export const inngest = new Inngest({ id: "Ecommerce" });
 
+/**
+ * Sync new user creation from Clerk
+ */
 export const syncUserCreation = inngest.createFunction(
   {
-    id: "sync-user-from-clerk",
+    id: "Ecommerce-sync-user-created", // ✅ Updated: unique, namespaced ID
   },
   {
     event: "clerk/user.created",
   },
   async ({ event }) => {
     const { id, firstName, lastName, emailAddresses, imageUrl } = event.data;
+
     const userData = {
       _id: id,
-      name: firstName + " " + lastName,
+      name: `${firstName} ${lastName}`,
       email: emailAddresses[0].emailAddress,
       imageUrl: imageUrl,
     };
+
     await connectDB();
     await User.create(userData);
   }
 );
 
-// update  user data in db
-
+/**
+ * Sync user updates from Clerk
+ */
 export const syncUserUpdate = inngest.createFunction(
   {
-    id: "sync-user-from-clerk",
+    id: "Ecommerce-sync-user-updated", // ✅ Updated: unique ID
   },
   {
     event: "clerk/user.updated",
   },
   async ({ event }) => {
     const { id, firstName, lastName, emailAddresses, imageUrl } = event.data;
+
     const userData = {
       _id: id,
-      name: firstName + " " + lastName,
+      name: `${firstName} ${lastName}`,
       email: emailAddresses[0].emailAddress,
       imageUrl: imageUrl,
     };
+
     await connectDB();
     await User.findByIdAndUpdate(id, userData);
   }
 );
 
-// delete user data from db
+/**
+ * Sync user deletion from Clerk
+ */
 export const syncUserDeletion = inngest.createFunction(
   {
-    id: "sync-user-from-clerk",
+    id: "Ecommerce-sync-user-deleted", // ✅ Updated: unique ID
   },
   {
     event: "clerk/user.deleted",
   },
   async ({ event }) => {
     const { id } = event.data;
+
     await connectDB();
     await User.findByIdAndDelete(id);
   }

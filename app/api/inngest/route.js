@@ -6,8 +6,9 @@ import {
   syncUserUpdate,
 } from "@/config/inngest";
 
-// Create an API that serves zero functions
-export const { GET, POST, PUT } = serve({
-  client: inngest,
-  functions: [syncUserCreation, syncUserUpdate, syncUserDeletion],
-});
+// ✅ Correct positional syntax to avoid serialization errors
+export const { GET, POST, PUT } = serve(inngest, [
+  syncUserCreation,
+  syncUserUpdate,
+  syncUserDeletion,
+]);

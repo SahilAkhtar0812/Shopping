@@ -59,53 +59,25 @@ const Navbar = () => {
               <UserButton.Action
                 label="Home"
                 onClick={() => router.push("/")}
-                labelIcon={
-                  <Image
-                    src={assets.home_icon}
-                    alt="Home"
-                    width={20}
-                    height={20}
-                  />
-                }
+                labelIcon={<HomeIcon />}
               />
               {/* ✅ All Products / Shop */}
               <UserButton.Action
                 label="All Products"
                 onClick={() => router.push("/all-products")}
-                labelIcon={
-                  <Image
-                    src={assets.shop_icon}
-                    alt="All Products"
-                    width={20}
-                    height={20}
-                  />
-                }
+                labelIcon={<BagIcon />}
               />
               {/* ✅ Cart */}
               <UserButton.Action
                 label="Cart"
                 onClick={() => router.push("/cart")}
-                labelIcon={
-                  <Image
-                    src={assets.cart_icon}
-                    alt="Cart"
-                    width={20}
-                    height={20}
-                  />
-                }
+                labelIcon={<CartIcon />}
               />
               {/* ✅ My Orders */}
               <UserButton.Action
                 label="My Orders"
                 onClick={() => router.push("/my-orders")}
-                labelIcon={
-                  <Image
-                    src={assets.box_icon}
-                    alt="My Orders"
-                    width={20}
-                    height={20}
-                  />
-                }
+                labelIcon={<BoxIcon />}
               />
             </UserButton.MenuItems>
           </UserButton>

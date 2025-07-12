@@ -2,13 +2,12 @@ import { serve } from "inngest/next";
 import {
   inngest,
   syncUserCreation,
-  syncUserDeletion,
   syncUserUpdate,
+  syncUserDeletion,
 } from "@/config/inngest";
 
-// ✅ Correct positional syntax to avoid serialization errors
-export const { GET, POST, PUT } = serve(inngest, [
-  syncUserCreation,
-  syncUserUpdate,
-  syncUserDeletion,
-]);
+// ✅ Inngest v3 requires object format
+export const { GET, POST, PUT } = serve({
+  client: inngest,
+  functions: [syncUserCreation, syncUserUpdate, syncUserDeletion],
+});

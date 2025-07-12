@@ -1,5 +1,4 @@
 {
-  "eslint": false,
   "rewrites": [
     {
       "source": "/api/inngest",
